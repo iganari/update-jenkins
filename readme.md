@@ -10,6 +10,12 @@
 sh update-jenkins.sh lts
 ```
 
++ 任意
+
+```
+sh update-jenkins.sh hogehoge
+```
+
 ### Python
 
 WIP
