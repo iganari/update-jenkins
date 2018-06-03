@@ -16,6 +16,12 @@ sh update-jenkins.sh lts
 sh update-jenkins.sh hogehoge
 ```
 
++ 最新Versionを入れる(not LTS)
+
+```
+sh update-jenkins.sh latest
+```
+
 ### Python
 
 WIP
