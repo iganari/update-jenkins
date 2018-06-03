@@ -11,6 +11,7 @@ sh update-jenkins.sh lts
 ```
 
 + 任意
+    + 数値チェック有り(WIP)
 
 ```
 sh update-jenkins.sh hogehoge
