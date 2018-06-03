@@ -1,4 +1,4 @@
-# update-jenkins-lts
+# update-jenkins
 
 ## 使い方
 
