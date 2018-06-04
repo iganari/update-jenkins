@@ -3,9 +3,6 @@
 # set -xeu
 set -x
 
-## $1 でverを入れさせる
-## ex 2.89.4
-
 check_arg()
 {
   if [ "$1" = "" ]; then
