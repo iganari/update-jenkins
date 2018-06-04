@@ -12,10 +12,10 @@ RUN rm -rfv /etc/localtime &&\
 RUN apt-get update
 RUN apt-get install -y vim python-pip
  
-# # RUN pip install boto3 ipython
+### install pip
+RUN pip install --upgrade pip
 # RUN pip install --upgrade pip &&\
-#       pip install ipython
-# 
+#     pip install ipython
 
 ### ADD Jenkins PATH
 RUN mkdir -p /usr/lib/jenkins
