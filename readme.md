@@ -25,7 +25,13 @@ sh update-jenkins.sh latest
 
 ### Python
 
-WIP
++ Version
+
+```
+# python --version
+
+Python 3.6.2
+```
 
 ## 簡易環境
 
