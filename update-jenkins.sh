@@ -8,13 +8,19 @@ set -x
 
 if [ "$1" = "" ]; then
     echo "no argument"
-    ## latest
+    ### latest
     _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
 
-elif [ "$1" = "latest" ];then
-    echo "latest"
-    ## latest
+elif [ "$1" = "latest" ]; then
+    echo "$1"
+    ### latest
     _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
+
+elif [ "$1" = "lts" ]; then
+    echo "$1"
+    ### get LTS version
+    _VER=`curl https://jenkins.io/changelog-stable/rss.xml | grep '<title>Jenkins' | cut -c8- | cut -d\< -f1 | cut -d\  -f2 | head -n1`
+
 else
     _VER=$1
 
