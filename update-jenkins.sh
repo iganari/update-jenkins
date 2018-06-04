@@ -29,13 +29,19 @@ else
 #     fi
 fi
 
-_JDIR='/usr/lib/jenkins'
+_J_DIR='/usr/lib/jenkins'
+
+check_os()
+{
+    _J_DIR='/usr/lib/jenkins'
+    
+}
 
 # echo $_VER
 
-mkdir ${_VER}
-wget http://updates.jenkins-ci.org/download/war/${_VER}/jenkins.war -O ${_VER}/jenkins.war
+mkdir ${_J_DIR}/${_VER}
+wget http://updates.jenkins-ci.org/download/war/${_VER}/jenkins.war -O ${_J_DIR}/${_VER}/jenkins.war
 
-unlink ${_JDIR}/jenkins.war
-ln -s ${_JDIR}/${_VER}/jenkins.war ${_JDIR}/jenkins.war
-systemctl stop jenkins && systemctl start jenkins
+# unlink ${_JDIR}/jenkins.war
+# ln -s ${_JDIR}/${_VER}/jenkins.war ${_JDIR}/jenkins.war
+# systemctl stop jenkins && systemctl start jenkins
