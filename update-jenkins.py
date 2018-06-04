@@ -4,4 +4,4 @@
 ### Doc
 # https://jenkins.io/changelog-stable/
 
-hogehoge
+print("hogehoge")
