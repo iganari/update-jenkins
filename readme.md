@@ -25,4 +25,22 @@ sh update-jenkins.sh latest
 
 ### Python
 
-WIP
++ Version
+
+```
+# python --version
+
+Python 3.6.2
+```
+
+## 簡易環境
+
+### docker
+
++ :whale: dockerを用いてスクリプトの簡易動作試験場を作る
+
+```
+cd opsfiles/docker
+sh docker-build-run.sh
+```
+

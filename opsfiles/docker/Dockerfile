@@ -16,8 +16,14 @@ RUN apt-get install -y vim python-pip
 # RUN pip install --upgrade pip &&\
 #       pip install ipython
 # 
+
 ### ADD Jenkins PATH
 RUN mkdir -p /usr/lib/jenkins
+### make dummyfile
+RUN touch           /usr/lib/jenkins/jenkins.war &&\
+    chown root.root /usr/lib/jenkins/jenkins.war &&\
+    chmod 0644      /usr/lib/jenkins/jenkins.war
+
 # 
 # # ADD _vimrc  /root/.vimrc
 # # ADD _bashrc /root/.bashrc
