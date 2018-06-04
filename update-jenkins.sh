@@ -43,13 +43,16 @@ _J_DIR='/usr/lib/jenkins'
 
 check_os()
 {
-  _J_DIR='/usr/lib/jenkins'    
+    # When CentOS
+    _J_DIR='/usr/lib/jenkins'
+    # When Other
+    # WIP
 }
 
 replace_jenkins_warfile()
 {
-  unlink                             ${_JDIR}/jenkins.war
-  ln -s ${_JDIR}/${_VER}/jenkins.war ${_JDIR}/jenkins.war 
+  unlink                              ${_J_DIR}/jenkins.war
+  ln -s ${_J_DIR}/${_VER}/jenkins.war ${_J_DIR}/jenkins.war 
 }
 
 restart_jenkins_process()
@@ -64,5 +67,5 @@ check_arg $1
 mkdir ${_J_DIR}/${_VER}
 wget http://updates.jenkins-ci.org/download/war/${_VER}/jenkins.war -O ${_J_DIR}/${_VER}/jenkins.war
 
-# replace_jenkins_warfile
+replace_jenkins_warfile
 # restart_jenkins_process
