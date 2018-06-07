@@ -39,8 +39,6 @@ Python 3.6.2
 source .update-jenkins/bin/activate
 ```
 
-
-
 + 仮想環境の無効化
 
 ```
