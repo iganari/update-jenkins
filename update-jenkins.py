@@ -21,6 +21,20 @@ def rss_url():
         sys.exit(1)
     return rss_url
 
+def chk_war_file():
+    import os
+    jenkins_war_dir  = '/usr/lib/jenkins'
+    jenkins_war_file = jenkins_war_dir + '/jenkins.war'
+
+    if os.path.isfile(jenkins_war_file):
+        if os.path.islink(jenkins_war_file):
+            print('OK')
+        else:
+            print ('must create link')
+    else:
+        print("must create")
+
+
 if __name__ == '__main__':
     
     args = sys.argv
@@ -64,6 +78,7 @@ if __name__ == '__main__':
     print (lts_ver)
     print (lts_ver[1])
 
+    chk_war_file()
 
 # def test():
 #     comment = "iganari test"
