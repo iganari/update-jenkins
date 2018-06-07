@@ -5,12 +5,7 @@
 # https://jenkins.io/changelog-stable/
 
 import sys
-# import ElementTree
-from xml.etree import ElementTree as ET
-# import urllib
-# from urllib.request import urlopen
-from urllib import urlopen
-# import urlopen
+
 
 args = sys.argv
 
@@ -22,19 +17,25 @@ elif len(args) > 2:
     print("引数が多すぎます")
 
 
-# rssを読み込む
+import feedparser
 
-url = 'https://jenkins.io/changelog-stable/rss.xml'
-req = urllib.request.Request(url)
+RSS_URL = 'https://jenkins.io/changelog-stable/rss.xml'
 
-with urllib.request.urlopen(req) as response:
-    XmlData = response.read()
+jenkins_lts_dic = feedparser.parse(RSS_URL)
 
-# 読み込んだrssを解析する
+# print (jenkins_lts_dic.feed.title)
+# print (jenkins_lts_dic.feed.title_detail)
+# print (jenkins_lts_dic.feed.updated)
+# print (jenkins_lts_dic.feed.item[0].title)
+# print (jenkins_lts_dic.feed)
+# print (jenkins_lts_dic)
+print (jenkins_lts_dic.entries[0].title, jenkins_lts_dic.entries[0].link)
+print (jenkins_lts_dic.entries[0].link)
 
-root = ET.fromtring(XmlData)
+lts_link = jenkins_lts_dic.entries[0].link
+print(lts_link)
 
-# print("hogehoge")
-
-print(root.tag,root.attrid)
+lts_ver = lts_link.split("#") 
+print (lts_ver)
+print (lts_ver[1])
 
