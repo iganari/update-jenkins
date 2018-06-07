@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 # cording: utf-8
 
-### Doc
+### Long-term Support (LTS) 
 # https://jenkins.io/changelog-stable/
+# https://jenkins.io/changelog-stable/rss.xml
+
+### Weekly
+# https://jenkins.io/changelog/
+# https://jenkins.io/changelog/rss.xml
 
 import sys
 
@@ -10,16 +15,22 @@ import sys
 args = sys.argv
 
 if len(args) == 1:
-    print("引数がありません")
+    print("引数を入れてください")
 elif len(args) == 2:
     print(args[1])
+    if args[1] == 'lts':
+        RSS_URL = 'https://jenkins.io/changelog-stable/rss.xml'
+    elif args[1] == 'latest':
+        RSS_URL = 'https://jenkins.io/changelog/rss.xml'
+    else:
+        print('引数が不正です')
+        sys.exit(1)
 elif len(args) > 2:
     print("引数が多すぎます")
 
+print(RSS_URL)
 
 import feedparser
-
-RSS_URL = 'https://jenkins.io/changelog-stable/rss.xml'
 
 jenkins_lts_dic = feedparser.parse(RSS_URL)
 
