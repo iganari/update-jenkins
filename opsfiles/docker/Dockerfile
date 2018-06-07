@@ -13,9 +13,9 @@ RUN apt-get update
 RUN apt-get install -y vim python-pip
  
 ### install pip
-RUN pip install --upgrade pip
-# RUN pip install --upgrade pip &&\
-#     pip install ipython
+# RUN pip install --upgrade pip
+RUN pip install --upgrade pip &&\
+    pip install ipython
 
 ### ADD Jenkins PATH
 RUN mkdir -p /usr/lib/jenkins
