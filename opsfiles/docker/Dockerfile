@@ -24,6 +24,9 @@ RUN touch           /usr/lib/jenkins/jenkins.war &&\
     chown root.root /usr/lib/jenkins/jenkins.war &&\
     chmod 0644      /usr/lib/jenkins/jenkins.war
 
+### cppy BASH_RC
+ADD _bashrc /root/.bashrc
+
 # 
 # # ADD _vimrc  /root/.vimrc
 # # ADD _bashrc /root/.bashrc
