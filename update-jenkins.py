@@ -71,6 +71,18 @@ def get_jenkins_war():
     with open(jenkins_war_file_new, "wb") as fp:
         shutil.copyfileobj(res.raw,fp)
 
+def chg_jenkins_symbolic():
+    print("WIP")
+
+def restart_jenkins():
+    print("WIP")
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     args = sys.argv
