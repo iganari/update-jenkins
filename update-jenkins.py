@@ -9,6 +9,7 @@
 
 
 import sys
+import os
 
 def rss_url():
     if args[1] == 'lts':
@@ -33,7 +34,7 @@ def chk_jenkins_ver():
 
 
 def chk_war_file():
-    import os
+    # import os
     # import datetime
     # import shutil
 
@@ -52,9 +53,23 @@ def chk_war_file():
         print("PATHが間違っているか、そもそもインストールされてない可能性があります")
         sys.exit(1)
 
+def get_jenkins_war():
+    import shutil
+    import requests
 
 
+    jenkins_war_dir  = '/usr/lib/jenkins'
+    jenkins_war_file = jenkins_war_dir + '/jenkins.war'
+    jenkins_war_dir_new = jenkins_war_dir + '/' + chk_jenkins_ver()
+    jenkins_war_file_new = jenkins_war_dir + '/' + chk_jenkins_ver() + '/jenkins.war'
+    jenkins_war_file_new_new_link = 'http://updates.jenkins-ci.org/download/war/' + chk_jenkins_ver() + '/jenkins.war'
 
+
+    os.mkdir(jenkins_war_dir_new)
+
+    res = requests.get(jenkins_war_file_new_new_link,stream=True)
+    with open(jenkins_war_file_new, "wb") as fp:
+        shutil.copyfileobj(res.raw,fp)
 
 
 if __name__ == '__main__':
@@ -73,7 +88,14 @@ if __name__ == '__main__':
 
         chk_war_file()
 
+        # 任意のVersionのjenkinsをダウンロードする
         get_jenkins_war()
+
+        # シンボリックリンクの付け替えを行う
+        chg_jenkins_symbolic()
+
+        # Jenkinsのプロセスの再起動を行う
+        restart_jenkins()
 
     elif len(args) > 2:
         print("引数が多すぎます")
