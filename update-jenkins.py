@@ -34,7 +34,6 @@ def chk_jenkins_ver():
 
 
 def chk_war_file():
-    # import os
     # import datetime
     # import shutil
 
