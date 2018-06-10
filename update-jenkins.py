@@ -58,7 +58,8 @@ def chk_war_file():
 
     if os.path.isfile(jks_war_file):
         if os.path.islink(jks_war_file):
-            print('OK')
+            # print('OK')
+            pass
         else:
             print ('準備が出来ていません')
             sys.exit(0)
@@ -70,29 +71,37 @@ def get_jks_war():
     import shutil
     import requests
 
-
     jks_war_dir  = '/usr/lib/jenkins'
     jks_war_file = jks_war_dir + '/jenkins.war'
-    jks_war_dir_new = jks_war_dir + '/' + chk_jks_ver()
-    jks_war_file_new = jks_war_dir + '/' + chk_jks_ver() + '/jenkins.war'
-    jks_war_file_new_new_link = 'http://updates.jenkins-ci.org/download/war/' + chk_jks_ver() + '/jenkins.war'
+    
+    # jks_war_dir_new = jks_war_dir + '/' + chk_jks_ver()
+    # jks_war_file_new = jks_war_dir + '/' + chk_jks_ver() + '/jenkins.war'
+    jks_war_file_new_link = 'http://updates.jenkins-ci.org/download/war/' + chk_jks_ver() + '/jenkins.war'
 
+    if os.path.isfile(jks_war_dir + '/' + chk_jks_ver() + '/jenkins.war'):
+        print ('既に本体ファイルがあります')
+        # sys.exit(0)
+    elif os.path.isdir(jks_war_dir + '/' + chk_jks_ver()):
+        print ('予期していないディレクトリがありましたので終了します')
+        sys.exit(0)
+    else:
+        # versionに合わせて、ディレクトリを作成する
+        os.mkdir(jks_war_dir + '/' + chk_jks_ver())
 
-    os.mkdir(jks_war_dir_new)
-
-    res = requests.get(jks_war_file_new_new_link,stream=True)
-    with open(jks_war_file_new, "wb") as fp:
-        shutil.copyfileobj(res.raw,fp)
+        # version毎のディレクトリの下にJenkinsの本体warをダウンロードする
+        res = requests.get(jks_war_file_new_link,stream=True)
+        with open(jks_war_dir + '/' + chk_jks_ver() + '/jenkins.war', "wb") as fp:
+            shutil.copyfileobj(res.raw,fp)
 
 def chg_jks_symbolic():
 
     jks_war_dir  = '/usr/lib/jenkins'
     jks_war_file = jks_war_dir + '/jenkins.war'
 
-    # os.
+    os.unlink(jks_war_file)
+    os.symlink(jks_war_dir + '/' + chk_jks_ver() + '/jenkins.war', jks_war_file)
 
-
-    print("WIP")
+    # print("WIP")
     
 
 def restart_jks():
@@ -121,9 +130,8 @@ if __name__ == '__main__':
     # jks_ver = chk_jks_ver()
     # print (jks_ver)
     print ('今回、ダウンロードしたいJenkinsのバージョン = ' + chk_jks_ver())
-    sys.exit(0)
 
-
+    # jenkinsの本体jarについてのチェックを行う
     chk_war_file()
 
     # 任意のVersionのjenkinsをダウンロードする
@@ -131,14 +139,7 @@ if __name__ == '__main__':
 
     # シンボリックリンクの付け替えを行う
     chg_jks_symbolic()
+    sys.exit(0)
 
     # Jenkinsのプロセスの再起動を行う
     restart_jks()
-
-
-    # print(RSS_URL)
-    
-
-    
-    # jenkins_ver = jenkins_ver()
-    # print(jenkins_ver)
