@@ -45,8 +45,6 @@ def chk_war_file():
             print('OK')
         else:
             print ('準備が出来ていません')
-            print ('python update-jenkins.py init')
-            print ('を実行してください')
             sys.exit(0)
     else:
         print("PATHが間違っているか、そもそもインストールされてない可能性があります")
