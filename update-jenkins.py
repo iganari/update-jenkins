@@ -113,7 +113,7 @@ if __name__ == '__main__':
     # 引数のチェック
     args = sys.argv
     chk_args()
-    print ('引数 = ' + args[1] + 'に問題はありません')
+    print ('引数 = ' + args[1] + ' の文字数に問題はありません')
 
     # 引数を元に参照すべきURLを決定する
     print('今回、ダウンロードすべきURL = ' + rss_url())
