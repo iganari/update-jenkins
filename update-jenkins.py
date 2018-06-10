@@ -133,7 +133,7 @@ if __name__ == '__main__':
 
     # シンボリックリンクの付け替えを行う
     chg_jks_symbolic()
-    sys.exit(0)
+    # sys.exit(0)
 
     # Jenkinsのプロセスの再起動を行う
     restart_jks()
