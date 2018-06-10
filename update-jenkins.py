@@ -44,10 +44,10 @@ def chk_war_file():
         if os.path.islink(jenkins_war_file):
             print('OK')
         else:
-            print ('must create link')
-            # print(jenkins_war_dir + '/' + jenkins_ver)
-            # os.mkdir(jenkins_war_dir + '/' + jenkins_ver)
-            # os.mkdir(jenkins_war_dir + '/backup_' + datetime.datetime.today().strftime("%Y%m%d"))
+            print ('準備が出来ていません')
+            print ('python update-jenkins.py init')
+            print ('を実行してください')
+            sys.exit(0)
     else:
         print("PATHが間違っているか、そもそもインストールされてない可能性があります")
         sys.exit(1)
@@ -71,7 +71,15 @@ def get_jenkins_war():
         shutil.copyfileobj(res.raw,fp)
 
 def chg_jenkins_symbolic():
+
+    jenkins_war_dir  = '/usr/lib/jenkins'
+    jenkins_war_file = jenkins_war_dir + '/jenkins.war'
+
+    # os.
+
+
     print("WIP")
+    
 
 def restart_jenkins():
     print("WIP")
@@ -84,6 +92,8 @@ def restart_jenkins():
 
 
 if __name__ == '__main__':
+ 
+    # 引数のチェック
     args = sys.argv
     if len(args) == 1:
         print("引数を入れてください")
