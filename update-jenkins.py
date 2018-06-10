@@ -110,14 +110,19 @@ if __name__ == '__main__':
     # 引数のチェック
     args = sys.argv
     chk_args()
-    print ('引数 = 'args[1] + 'に問題は無い　')
+    print ('引数 = ' + args[1] + 'に問題はありません')
+
+    # 引数を元に参照すべきURLを決定する
+    print('今回、ダウンロードすべきURL = ' + rss_url())
+    # dw_url = rss_url()
+    # print('今回、ダウンロードすべきURL = ' + dw_url)
 
     # 引数で要求されたJenkinsのバージョンを取る
-    jks_ver = chk_jks_ver()
-    print(jks_ver)
+    # jks_ver = chk_jks_ver()
+    # print (jks_ver)
+    print ('今回、ダウンロードしたいJenkinsのバージョン = ' + chk_jks_ver())
+    sys.exit(0)
 
-    RSS_URL = rss_url()
-    print(RSS_URL)
 
     chk_war_file()
 
