@@ -12,10 +12,10 @@ RUN rm -rfv /etc/localtime &&\
 RUN apt-get update
 RUN apt-get install -y vim python-pip
  
-# # RUN pip install boto3 ipython
-# RUN pip install --upgrade pip &&\
-#       pip install ipython
-# 
+### install pip
+# RUN pip install --upgrade pip
+RUN pip install --upgrade pip &&\
+    pip install ipython
 
 ### ADD Jenkins PATH
 RUN mkdir -p /usr/lib/jenkins
@@ -23,6 +23,13 @@ RUN mkdir -p /usr/lib/jenkins
 RUN touch           /usr/lib/jenkins/jenkins.war &&\
     chown root.root /usr/lib/jenkins/jenkins.war &&\
     chmod 0644      /usr/lib/jenkins/jenkins.war
+
+# ### Temp pip install
+# RUN pip install requests \
+#                 feedparser
+
+### cppy BASH_RC
+ADD _bashrc /root/.bashrc
 
 # 
 # # ADD _vimrc  /root/.vimrc
