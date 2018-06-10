@@ -14,6 +14,19 @@
 import sys
 import os
 
+
+def chk_args():
+    # args = sys.argv
+    if len(args) == 1:
+        print ('引数をいれてください')
+        sys.exit(0)
+    elif len(args) == 2:
+        # print ('OK')
+        pass 
+    elif len(args) > 2:
+        print ('引数が多すぎます')
+        sys.exit(0)
+
 def rss_url():
     if args[1] == 'lts':
         rss_url = 'https://jenkins.io/changelog-stable/rss.xml'
@@ -82,7 +95,7 @@ def chg_jks_symbolic():
     print("WIP")
     
 
-def restart_jenkins():
+def restart_jks():
     print("WIP")
 
 
@@ -96,32 +109,28 @@ if __name__ == '__main__':
  
     # 引数のチェック
     args = sys.argv
-    if len(args) == 1:
-        print("引数を入れてください")
-        sys.exit(1)
-    elif len(args) == 2:
-        print(args[1])
+    chk_args()
+    print ('引数 = 'args[1] + 'に問題は無い　')
 
-        jks_ver = chk_jks_ver()
-        print(jks_ver)
+    # 引数で要求されたJenkinsのバージョンを取る
+    jks_ver = chk_jks_ver()
+    print(jks_ver)
 
-        RSS_URL = rss_url()
-        print(RSS_URL)
+    RSS_URL = rss_url()
+    print(RSS_URL)
 
-        chk_war_file()
+    chk_war_file()
 
-        # 任意のVersionのjenkinsをダウンロードする
-        get_jks_war()
+    # 任意のVersionのjenkinsをダウンロードする
+    get_jks_war()
 
-        # シンボリックリンクの付け替えを行う
-        chg_jks_symbolic()
+    # シンボリックリンクの付け替えを行う
+    chg_jks_symbolic()
 
-        # Jenkinsのプロセスの再起動を行う
-        restart_jenkins()
+    # Jenkinsのプロセスの再起動を行う
+    restart_jks()
 
-    elif len(args) > 2:
-        print("引数が多すぎます")
-        sys.exit(1)
+
     # print(RSS_URL)
     
 
