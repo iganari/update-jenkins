@@ -100,18 +100,12 @@ def chg_jks_symbolic():
 
     os.unlink(jks_war_file)
     os.symlink(jks_war_dir + '/' + chk_jks_ver() + '/jenkins.war', jks_war_file)
-
-    # print("WIP")
     
 
 def restart_jks():
-    print("WIP")
-
-
-
-
-
-
+    os.system('systemctl stop   jenkins')
+    os.system('systemctl start  jenkins')
+    os.system('systemctl status jenkins')
 
 
 if __name__ == '__main__':
