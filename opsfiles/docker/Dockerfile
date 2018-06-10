@@ -24,6 +24,10 @@ RUN touch           /usr/lib/jenkins/jenkins.war &&\
     chown root.root /usr/lib/jenkins/jenkins.war &&\
     chmod 0644      /usr/lib/jenkins/jenkins.war
 
+### Temp pip install
+RUN pip install requests \
+                feedparser
+
 ### cppy BASH_RC
 ADD _bashrc /root/.bashrc
 
