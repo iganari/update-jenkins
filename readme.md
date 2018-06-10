@@ -33,6 +33,18 @@ sh update-jenkins.sh latest
 Python 3.6.2
 ```
 
++ 仮想環境の有効化
+
+```
+source .update-jenkins/bin/activate
+```
+
++ 仮想環境の無効化
+
+```
+deactivate
+```
+
 ## 簡易環境
 
 ### docker
