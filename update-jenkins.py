@@ -8,6 +8,9 @@
 # https://jenkins.io/changelog/rss.xml
 
 
+# jenkins => jks
+
+
 import sys
 import os
 
@@ -21,13 +24,13 @@ def rss_url():
         sys.exit(1)
     return rss_url
 
-def chk_jenkins_ver():
+def chk_jks_ver():
     import feedparser
 
     url = rss_url()
-    jenkins_dic = feedparser.parse(url)
+    jks_dic = feedparser.parse(url)
     
-    full_version = jenkins_dic.entries[0].link
+    full_version = jks_dic.entries[0].link
     only_version = full_version.split("#v")[1]
     #  print(only_version)
     return only_version
@@ -37,11 +40,11 @@ def chk_war_file():
     # import datetime
     # import shutil
 
-    jenkins_war_dir  = '/usr/lib/jenkins'
-    jenkins_war_file = jenkins_war_dir + '/jenkins.war'
+    jks_war_dir  = '/usr/lib/jenkins'
+    jks_war_file = jks_war_dir + '/jenkins.war'
 
-    if os.path.isfile(jenkins_war_file):
-        if os.path.islink(jenkins_war_file):
+    if os.path.isfile(jks_war_file):
+        if os.path.islink(jks_war_file):
             print('OK')
         else:
             print ('準備が出来ていません')
@@ -50,28 +53,28 @@ def chk_war_file():
         print("PATHが間違っているか、そもそもインストールされてない可能性があります")
         sys.exit(1)
 
-def get_jenkins_war():
+def get_jks_war():
     import shutil
     import requests
 
 
-    jenkins_war_dir  = '/usr/lib/jenkins'
-    jenkins_war_file = jenkins_war_dir + '/jenkins.war'
-    jenkins_war_dir_new = jenkins_war_dir + '/' + chk_jenkins_ver()
-    jenkins_war_file_new = jenkins_war_dir + '/' + chk_jenkins_ver() + '/jenkins.war'
-    jenkins_war_file_new_new_link = 'http://updates.jenkins-ci.org/download/war/' + chk_jenkins_ver() + '/jenkins.war'
+    jks_war_dir  = '/usr/lib/jenkins'
+    jks_war_file = jks_war_dir + '/jenkins.war'
+    jks_war_dir_new = jks_war_dir + '/' + chk_jks_ver()
+    jks_war_file_new = jks_war_dir + '/' + chk_jks_ver() + '/jenkins.war'
+    jks_war_file_new_new_link = 'http://updates.jenkins-ci.org/download/war/' + chk_jks_ver() + '/jenkins.war'
 
 
-    os.mkdir(jenkins_war_dir_new)
+    os.mkdir(jks_war_dir_new)
 
-    res = requests.get(jenkins_war_file_new_new_link,stream=True)
-    with open(jenkins_war_file_new, "wb") as fp:
+    res = requests.get(jks_war_file_new_new_link,stream=True)
+    with open(jks_war_file_new, "wb") as fp:
         shutil.copyfileobj(res.raw,fp)
 
-def chg_jenkins_symbolic():
+def chg_jks_symbolic():
 
-    jenkins_war_dir  = '/usr/lib/jenkins'
-    jenkins_war_file = jenkins_war_dir + '/jenkins.war'
+    jks_war_dir  = '/usr/lib/jenkins'
+    jks_war_file = jks_war_dir + '/jenkins.war'
 
     # os.
 
@@ -99,8 +102,8 @@ if __name__ == '__main__':
     elif len(args) == 2:
         print(args[1])
 
-        jenkins_ver = chk_jenkins_ver()
-        print(jenkins_ver)
+        jks_ver = chk_jks_ver()
+        print(jks_ver)
 
         RSS_URL = rss_url()
         print(RSS_URL)
@@ -108,10 +111,10 @@ if __name__ == '__main__':
         chk_war_file()
 
         # 任意のVersionのjenkinsをダウンロードする
-        get_jenkins_war()
+        get_jks_war()
 
         # シンボリックリンクの付け替えを行う
-        chg_jenkins_symbolic()
+        chg_jks_symbolic()
 
         # Jenkinsのプロセスの再起動を行う
         restart_jenkins()
