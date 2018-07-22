@@ -11,6 +11,11 @@ check_arg()
     echo "no argument"
     ### latest + forceupdate
     _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
+
+  elif [ "$1" = "-f" ]; then
+    echo "no argument"
+    ### latest + forceupdate
+    _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
  
   elif [ "$1" = "latest" ]; then
     echo "$1"
