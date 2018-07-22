@@ -5,23 +5,42 @@ set -x
 
 check_arg()
 {
+  ## sh update-jenkins.sh version -y の形しか許さない
+
   if [ "$1" = "" ]; then
-      echo "no argument"
-      ### latest
-      _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
-  
+    echo "no argument"
+    ### latest + forceupdate
+    _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
+ 
   elif [ "$1" = "latest" ]; then
-      echo "$1"
-      ### latest
-      _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
-  
+    echo "$1"
+    ### latest
+    _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
+    if [ "$2" = "" ];then
+      _FORCE_FRAG='false'  
+    elif [ "$2" = "-y" ];then
+      _FORCE_FRAG='true'
+    else
+      echo 'bad arg'
+      exit 0
+    fi
+
   elif [ "$1" = "lts" ]; then
-      echo "$1"
-      ### get LTS version
-      _VER=`curl https://jenkins.io/changelog-stable/rss.xml | grep '<title>Jenkins' | cut -c8- | cut -d\< -f1 | cut -d\  -f2 | head -n1`
+    echo "$1"
+    ### get LTS version
+    _VER=`curl https://jenkins.io/changelog-stable/rss.xml | grep '<title>Jenkins' | cut -c8- | cut -d\< -f1 | cut -d\  -f2 | head -n1`
+    if [ "$2" = "" ];then
+      _FORCE_FRAG='false'  
+    elif [ "$2" = "-y" ];then
+      _FORCE_FRAG='true'
+    else
+      echo 'bad arg'
+      exit 0
+    fi
   
   else
-      _VER=$1
+    echo 'bad arg'
+    exit 0
   fi
 }
 
@@ -74,6 +93,9 @@ replace_jenkins_warfile()
 
 restart_jenkins_process()
 {
+
+  # _FORCE_FRAG='true'
+
   systemctl stop   jenkins &&\
   systemctl start  jenkins &&\
   systemctl status jenkins
