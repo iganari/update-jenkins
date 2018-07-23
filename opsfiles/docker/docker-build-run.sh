@@ -2,8 +2,23 @@
 
 set -xeu
 
-_TAG='update-jenkins'
+_I_TAG='update-jenkins'
+BASEPATH=$(cd `dirname $0`; pwd)
+REPOPATH=$(cd ../../`dirname $0`; pwd)
+# DIREPATH=`echo $BASEPATH | awk -F\/ '{print $NF}'`
+DIREPATH=`echo $REPOPATH | awk -F\/ '{print $NF}'`
 
-docker build . -t ${_TAG}
+set +eu
+docker rm -f ${_I_TAG}
+set -eu
 
-sh ./docker-run.sh ${_TAG}
+docker build . -t ${_I_TAG}
+
+docker run --rm \
+           -it \
+           -v $REPOPATH:/opt/hejda/$DIREPATH \
+           -w /opt/hejda/$DIREPATH \
+           -h ${_I_TAG} \
+           --name ${_I_TAG} \
+           ${_I_TAG} \
+           /bin/bash
