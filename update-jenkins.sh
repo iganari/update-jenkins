@@ -100,17 +100,34 @@ restart_jenkins_process()
 {
 
   # _FORCE_FRAG='true'
-
-  systemctl stop   jenkins &&\
-  systemctl start  jenkins &&\
-  systemctl status jenkins
+  if [ "${_FORCE_FRAG}" = "true" ];then
+    systemctl stop   jenkins &&\
+    systemctl start  jenkins &&\
+    systemctl status jenkins
+  elif [ "$_FORCE_FRAG" = "false" ];then
+    echo "force push ?? [y/N]"
+    read ans
+    if [ "${ans}" = "y" ];then
+      systemctl stop   jenkins &&\
+      systemctl start  jenkins &&\
+      systemctl status jenkins
+    elif [ "${ans}" = "N" ];then
+      echo 'pass'
+      :
+    else
+      :
+    fi
+  else
+    echo "bad request"
+    :
+  fi
 }
 
 # echo $_VER
-check_arg $1
+check_arg $1 $2
 check_jenkins_path
 mkdir ${_J_DIR}/${_VER}
 wget http://updates.jenkins-ci.org/download/war/${_VER}/jenkins.war -O ${_J_DIR}/${_VER}/jenkins.war
 
 replace_jenkins_warfile
-# restart_jenkins_process
+restart_jenkins_process
