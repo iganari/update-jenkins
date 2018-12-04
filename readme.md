@@ -39,6 +39,12 @@ Python 3.6.2
 source .update-jenkins/bin/activate
 ```
 
++ 必要なライブラリをpip installする
+
+```
+pip install -r requirements.txt
+```
+
 + 仮想環境の無効化
 
 ```
