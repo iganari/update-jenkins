@@ -1,8 +1,6 @@
 # update-jenkins
 
-## 使い方
-
-### shell
+## Shell 版
 
 + LTS update
 
@@ -23,7 +21,7 @@ sh update-jenkins.sh hogehoge
 sh update-jenkins.sh latest
 ```
 
-### Python
+## Python 版
 
 + Version
 
