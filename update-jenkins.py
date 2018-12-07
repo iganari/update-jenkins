@@ -62,7 +62,7 @@ def chk_war_file():
             # print('OK')
             pass
         else:
-            print ('準備が出来ていません')
+            print ( jks_war_file + 'がシンボリックリンクでは無いため、プログラムを継続出来ません')
             sys.exit(0)
     else:
         print("PATHが間違っているか、そもそもインストールされてない可能性があります")
