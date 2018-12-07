@@ -1,5 +1,6 @@
-# FROM jenkins:2.60.3
-FROM python:3.6.2-stretch
+ARG _TAG='3.7.1-alpine3.8'
+FROM python:${_TAG}
+# https://hub.docker.com/_/python/
 
 MAINTAINER iganari
 
@@ -30,7 +31,3 @@ RUN touch           /usr/lib/jenkins/jenkins.war &&\
 
 ### cppy BASH_RC
 ADD _bashrc /root/.bashrc
-
-# 
-# # ADD _vimrc  /root/.vimrc
-# # ADD _bashrc /root/.bashrc
