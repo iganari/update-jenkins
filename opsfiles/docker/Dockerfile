@@ -1,4 +1,4 @@
-ARG _TAG='3.7.1-alpine3.8'
+ARG _TAG='3.7.1-stretch'
 FROM python:${_TAG}
 # https://hub.docker.com/_/python/
 
