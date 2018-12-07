@@ -1,5 +1,7 @@
 # update-jenkins
 
+[![CircleCI](https://circleci.com/gh/iganari/update-jenkins/tree/master.svg?style=svg)](https://circleci.com/gh/iganari/update-jenkins/tree/master)
+
 ## Shell 版
 
 + LTS update
