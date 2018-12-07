@@ -1,8 +1,6 @@
 # update-jenkins
 
-## 使い方
-
-### shell
+## Shell 版
 
 + LTS update
 
@@ -23,7 +21,7 @@ sh update-jenkins.sh hogehoge
 sh update-jenkins.sh latest
 ```
 
-### Python
+## Python 版
 
 + Version
 
@@ -38,6 +36,32 @@ Python 3.6.2
 ```
 source .update-jenkins/bin/activate
 ```
+
++ 必要なライブラリをpip installする
+
+```
+pip install -r requirements.txt
+```
+
++ JenkinsのWARをダウンロードする
+    + LTS版
+
+    ```
+    python3 update-jenkins.py lts
+    ```
+    
+    + 最新版
+
+    ```
+    python3 update-jenkins.py latest
+    ```
+
+    + Version指定( :warning: WIP :warning: )
+
+    ```
+    python3 update-jenkins.py 2.153
+    ```
+
 
 + 仮想環境の無効化
 
