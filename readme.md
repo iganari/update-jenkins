@@ -45,23 +45,35 @@ source .update-jenkins/bin/activate
 pip install -r requirements.txt
 ```
 
-+ JenkinsのWARをダウンロードする
++ 使用出来るバージョンの確認をする
+
+```
+WIP
+python3 update-jenkins.py -c
+OR
+python3 update-jenkins.py --check
+```
+
++ JenkinsのWARをダウンロードして入れ替える + Jenkinsの再起動
     + LTS版
 
     ```
-    python3 update-jenkins.py lts
+    WIP
+    python3 update-jenkins.py -v lts
     ```
     
     + 最新版
 
     ```
-    python3 update-jenkins.py latest
+    WIP
+    python3 update-jenkins.py -v latest
     ```
 
     + Version指定( :warning: WIP :warning: )
 
     ```
-    python3 update-jenkins.py 2.153
+    WIP
+    python3 update-jenkins.py -v 2.153
     ```
 
 
