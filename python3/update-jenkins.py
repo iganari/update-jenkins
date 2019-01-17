@@ -14,7 +14,7 @@
 import sys
 import os
 
-args = sys.argv
+# args = sys.argv
 
 ### check_argsにより不要になる
 # def chk_args():
@@ -48,10 +48,21 @@ def parse_opts():
     # print(args.support)
     return parser.parse_args()
 
-def rss_url():
+# def rss_url():
+# 
+#     # check_args()
+#     
+#     if args.support == 'lts':
+#         rss_url = 'https://jenkins.io/changelog-stable/rss.xml'
+#     elif args.support == 'latest':
+#         rss_url = 'https://jenkins.io/changelog/rss.xml'
+#     else:
+#         print('引数が不正です')
+#         sys.exit(1)
+#     return rss_url
 
-    # check_args()
-    
+def jedge_rss_url(args):
+
     if args.support == 'lts':
         rss_url = 'https://jenkins.io/changelog-stable/rss.xml'
     elif args.support == 'latest':
@@ -59,7 +70,10 @@ def rss_url():
     else:
         print('引数が不正です')
         sys.exit(1)
+
     return rss_url
+
+
 
 def chk_jks_ver():
     import feedparser
@@ -165,8 +179,10 @@ def main(args):
 
     # chk_jks_ver()
 
-    print(args)
-    print(args.support)
+    # print(args)
+    # print(args.support)
+
+    print (jedge_rss_url(args))
 
 
 if __name__ == '__main__':
