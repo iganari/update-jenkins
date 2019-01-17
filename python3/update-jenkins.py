@@ -14,22 +14,6 @@
 import sys
 import os
 
-# args = sys.argv
-
-### check_argsにより不要になる
-# def chk_args():
-#     # args = sys.argv
-#     if len(args) == 1:
-#         print ('引数をいれてください')
-#         sys.exit(0)
-#     elif len(args) == 2:
-#         # print ('OK')
-#         pass 
-#     elif len(args) > 2:
-#         print ('引数が多すぎます')
-#         sys.exit(0)
-
-
 def parse_opts():
 
     # import argparse
@@ -44,22 +28,8 @@ def parse_opts():
         help='Usage: python3 ' + __file__ + ' {lts|latest}'
     )
 
-    # args = parser.parse_args()
-    # print(args.support)
     return parser.parse_args()
 
-# def rss_url():
-# 
-#     # check_args()
-#     
-#     if args.support == 'lts':
-#         rss_url = 'https://jenkins.io/changelog-stable/rss.xml'
-#     elif args.support == 'latest':
-#         rss_url = 'https://jenkins.io/changelog/rss.xml'
-#     else:
-#         print('引数が不正です')
-#         sys.exit(1)
-#     return rss_url
 
 def jedge_rss_url(args):
 
@@ -88,8 +58,6 @@ def chk_jks_ver():
 
 
 def chk_war_file():
-    # import datetime
-    # import shutil
 
     jks_war_dir  = '/usr/lib/jenkins'
     jks_war_file = jks_war_dir + '/jenkins.war'
