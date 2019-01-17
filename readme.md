@@ -33,19 +33,32 @@ sh update-jenkins.sh latest
 Python 3.6.2
 ```
 
-+ 仮想環境の有効化
++ 仮想環境について
+    + 作成
 
-```
-source .update-jenkins/bin/activate
-```
+    ```
+    python3 -m venv .update-jenkins
+    ```
 
-+ 必要なライブラリをpip installする
+    + 仮想環境の有効化
 
-```
-pip install -r requirements.txt
-```
+    ```
+    source .update-jenkins/bin/activate
+    ```
 
-+ 使用出来るバージョンの確認をする
+    + 必要なライブラリをpip installする
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+    + 無効化
+
+    ```
+    deactivate
+    ```
+
++ [機能] 使用出来るバージョンの確認をする
 
 ```
 WIP
@@ -54,7 +67,7 @@ OR
 python3 update-jenkins.py --check
 ```
 
-+ JenkinsのWARをダウンロードして入れ替える + Jenkinsの再起動
++ [機能] JenkinsのWARをダウンロードして入れ替える + Jenkinsの再起動
     + LTS版
 
     ```
@@ -77,11 +90,6 @@ python3 update-jenkins.py --check
     ```
 
 
-+ 仮想環境の無効化
-
-```
-deactivate
-```
 
 ## 簡易環境
 
