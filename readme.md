@@ -87,10 +87,16 @@ deactivate
 
 ### docker
 
-+ :whale: dockerを用いてスクリプトの簡易動作試験場を作る
++ dockerを用いてスクリプトの簡易動作試験場を作る
 
 ```
 cd opsfiles/docker
 sh docker-build-run.sh
 ```
 
++ :whale: Jenkinsの確認(ダミーファイル)
+
+```
+# ls -la /usr/lib/jenkins/jenkins.war 
+-rw-r--r-- 1 root root 0 Jan 17 11:14 /usr/lib/jenkins/jenkins.war
+```
