@@ -166,6 +166,7 @@ def main(args):
     # chk_jks_ver()
 
     print(args)
+    print(args.support)
 
 
 if __name__ == '__main__':
