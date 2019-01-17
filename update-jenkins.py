@@ -14,6 +14,7 @@
 import sys
 import os
 
+args = sys.argv
 
 def chk_args():
     # args = sys.argv
@@ -61,7 +62,7 @@ def chk_war_file():
             # print('OK')
             pass
         else:
-            print ('準備が出来ていません')
+            print ( jks_war_file + 'がシンボリックリンクでは無いため、プログラムを継続出来ません')
             sys.exit(0)
     else:
         print("PATHが間違っているか、そもそもインストールされてない可能性があります")
@@ -108,10 +109,11 @@ def restart_jks():
     os.system('systemctl status jenkins')
 
 
-if __name__ == '__main__':
+# main
+def main():
  
     # 引数のチェック
-    args = sys.argv
+    # args = sys.argv
     chk_args()
     print ('引数 = ' + args[1] + ' の文字数に問題はありません')
 
@@ -137,3 +139,7 @@ if __name__ == '__main__':
 
     # Jenkinsのプロセスの再起動を行う
     restart_jks()
+
+
+if __name__ == '__main__':
+    main()
