@@ -14,29 +14,66 @@
 import sys
 import os
 
-args = sys.argv
+# args = sys.argv
 
-def chk_args():
-    # args = sys.argv
-    if len(args) == 1:
-        print ('引数をいれてください')
-        sys.exit(0)
-    elif len(args) == 2:
-        # print ('OK')
-        pass 
-    elif len(args) > 2:
-        print ('引数が多すぎます')
-        sys.exit(0)
+### check_argsにより不要になる
+# def chk_args():
+#     # args = sys.argv
+#     if len(args) == 1:
+#         print ('引数をいれてください')
+#         sys.exit(0)
+#     elif len(args) == 2:
+#         # print ('OK')
+#         pass 
+#     elif len(args) > 2:
+#         print ('引数が多すぎます')
+#         sys.exit(0)
 
-def rss_url():
-    if args[1] == 'lts':
+
+def parse_opts():
+
+    # import argparse
+    from argparse import ArgumentParser
+
+    # parser = argparse.ArgumentParser(description='argpaese test')
+    parser = ArgumentParser()
+    parser.add_argument(
+        '--support',
+        '-s',
+        required=True,
+        help='Usage: python3 ' + __file__ + ' {lts|latest}'
+    )
+
+    # args = parser.parse_args()
+    # print(args.support)
+    return parser.parse_args()
+
+# def rss_url():
+# 
+#     # check_args()
+#     
+#     if args.support == 'lts':
+#         rss_url = 'https://jenkins.io/changelog-stable/rss.xml'
+#     elif args.support == 'latest':
+#         rss_url = 'https://jenkins.io/changelog/rss.xml'
+#     else:
+#         print('引数が不正です')
+#         sys.exit(1)
+#     return rss_url
+
+def jedge_rss_url(args):
+
+    if args.support == 'lts':
         rss_url = 'https://jenkins.io/changelog-stable/rss.xml'
-    elif args[1] == 'latest':
+    elif args.support == 'latest':
         rss_url = 'https://jenkins.io/changelog/rss.xml'
     else:
         print('引数が不正です')
         sys.exit(1)
+
     return rss_url
+
+
 
 def chk_jks_ver():
     import feedparser
@@ -110,36 +147,46 @@ def restart_jks():
 
 
 # main
-def main():
+def main(args):
  
-    # 引数のチェック
-    # args = sys.argv
-    chk_args()
-    print ('引数 = ' + args[1] + ' の文字数に問題はありません')
+    # # 引数のチェック
+    # # args = sys.argv
+    # chk_args()
+    # print ('引数 = ' + args[1] + ' の文字数に問題はありません')
 
-    # 引数を元に参照すべきURLを決定する
-    print('今回、ダウンロードすべきURL = ' + rss_url())
-    # dw_url = rss_url()
-    # print('今回、ダウンロードすべきURL = ' + dw_url)
+    # # 引数を元に参照すべきURLを決定する
+    # print('今回、ダウンロードすべきURL = ' + rss_url())
+    # # dw_url = rss_url()
+    # # print('今回、ダウンロードすべきURL = ' + dw_url)
 
-    # 引数で要求されたJenkinsのバージョンを取る
-    # jks_ver = chk_jks_ver()
-    # print (jks_ver)
-    print ('今回、ダウンロードしたいJenkinsのバージョン = ' + chk_jks_ver())
+    # # 引数で要求されたJenkinsのバージョンを取る
+    # # jks_ver = chk_jks_ver()
+    # # print (jks_ver)
+    # print ('今回、ダウンロードしたいJenkinsのバージョン = ' + chk_jks_ver())
 
-    # jenkinsの本体jarについてのチェックを行う
-    chk_war_file()
+    # # jenkinsの本体jarについてのチェックを行う
+    # chk_war_file()
 
-    # 任意のVersionのjenkinsをダウンロードする
-    get_jks_war()
+    # # 任意のVersionのjenkinsをダウンロードする
+    # get_jks_war()
 
-    # シンボリックリンクの付け替えを行う
-    chg_jks_symbolic()
-    # sys.exit(0)
+    # # シンボリックリンクの付け替えを行う
+    # chg_jks_symbolic()
+    # # sys.exit(0)
 
-    # Jenkinsのプロセスの再起動を行う
-    restart_jks()
+    # # Jenkinsのプロセスの再起動を行う
+    # restart_jks()
+
+    # chk_jks_ver()
+
+    # print(args)
+    # print(args.support)
+
+    print (jedge_rss_url(args))
 
 
 if __name__ == '__main__':
-    main()
+
+    args = parse_opts()    
+    
+    main(args)
