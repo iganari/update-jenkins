@@ -68,7 +68,7 @@ def jedge_rss_url(args):
     elif args.support == 'latest':
         rss_url = 'https://jenkins.io/changelog/rss.xml'
     else:
-        print('引数が不正です')
+        print('Plz Use Support Option Only: --support {lts|latest}')
         sys.exit(1)
 
     return rss_url
@@ -182,7 +182,7 @@ def main(args):
     # print(args)
     # print(args.support)
 
-    print (jedge_rss_url(args))
+    print ('RSS URL is %s' % (jedge_rss_url(args)))
 
 
 if __name__ == '__main__':
