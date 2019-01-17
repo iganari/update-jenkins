@@ -97,6 +97,7 @@ def get_jks_war():
 def chg_jks_symbolic():
 
     jks_war_dir  = '/usr/lib/jenkins'
+    
     jks_war_file = jks_war_dir + '/jenkins.war'
 
     os.unlink(jks_war_file)
@@ -112,33 +113,33 @@ def restart_jks():
 # main
 def main():
  
-    # 引数のチェック
-    # args = sys.argv
+    # # 引数のチェック
+    # # args = sys.argv
     chk_args()
     print ('引数 = ' + args[1] + ' の文字数に問題はありません')
 
-    # 引数を元に参照すべきURLを決定する
-    print('今回、ダウンロードすべきURL = ' + rss_url())
-    # dw_url = rss_url()
-    # print('今回、ダウンロードすべきURL = ' + dw_url)
+    # # 引数を元に参照すべきURLを決定する
+    # print('今回、ダウンロードすべきURL = ' + rss_url())
+    # # dw_url = rss_url()
+    # # print('今回、ダウンロードすべきURL = ' + dw_url)
 
-    # 引数で要求されたJenkinsのバージョンを取る
-    # jks_ver = chk_jks_ver()
-    # print (jks_ver)
-    print ('今回、ダウンロードしたいJenkinsのバージョン = ' + chk_jks_ver())
+    # # 引数で要求されたJenkinsのバージョンを取る
+    # # jks_ver = chk_jks_ver()
+    # # print (jks_ver)
+    # print ('今回、ダウンロードしたいJenkinsのバージョン = ' + chk_jks_ver())
 
-    # jenkinsの本体jarについてのチェックを行う
-    chk_war_file()
+    # # jenkinsの本体jarについてのチェックを行う
+    # chk_war_file()
 
-    # 任意のVersionのjenkinsをダウンロードする
-    get_jks_war()
+    # # 任意のVersionのjenkinsをダウンロードする
+    # get_jks_war()
 
-    # シンボリックリンクの付け替えを行う
-    chg_jks_symbolic()
-    # sys.exit(0)
+    # # シンボリックリンクの付け替えを行う
+    # chg_jks_symbolic()
+    # # sys.exit(0)
 
-    # Jenkinsのプロセスの再起動を行う
-    restart_jks()
+    # # Jenkinsのプロセスの再起動を行う
+    # restart_jks()
 
 
 if __name__ == '__main__':
