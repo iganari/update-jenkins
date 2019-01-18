@@ -14,55 +14,35 @@
 import sys
 import os
 
-# args = sys.argv
-
-# def chk_args():
-#     # args = sys.argv
-#     if len(args) == 1:
-#         print ('引数をいれてください')
-#         sys.exit(0)
-#     elif len(args) == 2:
-#         # print ('OK')
-#         pass 
-#     elif len(args) > 2:
-#         print ('引数が多すぎます')
-#         sys.exit(0)
-
 def parse_opts():
 
-    # from argparse import ArgumentParser
-    import argparse
+    # import argparse
+    from argparse import ArgumentParser
 
-    parser = argparse.ArgumentParser()
+    # parser = argparse.ArgumentParser(description='argpaese test')
+    parser = ArgumentParser()
     parser.add_argument(
         '--support',
         '-s',
         required=True,
-        dest='support',
         help='Usage: python3 ' + __file__ + ' {lts|latest}'
     )
 
     return parser.parse_args()
 
-def check_args(args):
 
-    if args.support == 'lts' or args.support == 'latest':
-        # pass
-        print('ok')
-    else:
-        print('Support Argument is {lts|latest}')
-        sys.exit(1)
+def jedge_rss_url(args):
 
-
-def rss_url():
-    if args[1] == 'lts':
+    if args.support == 'lts':
         rss_url = 'https://jenkins.io/changelog-stable/rss.xml'
-    elif args[1] == 'latest':
+    elif args.support == 'latest':
         rss_url = 'https://jenkins.io/changelog/rss.xml'
     else:
-        print('引数が不正です')
+        print('Plz Use Support Option Only: --support {lts|latest}')
         sys.exit(1)
+
     return rss_url
+
 
 def chk_jks_ver():
     import feedparser
@@ -77,8 +57,6 @@ def chk_jks_ver():
 
 
 def chk_war_file():
-    # import datetime
-    # import shutil
 
     jks_war_dir  = '/usr/lib/jenkins'
     jks_war_file = jks_war_dir + '/jenkins.war'
@@ -123,7 +101,6 @@ def get_jks_war():
 def chg_jks_symbolic():
 
     jks_war_dir  = '/usr/lib/jenkins'
-    
     jks_war_file = jks_war_dir + '/jenkins.war'
 
     os.unlink(jks_war_file)
@@ -139,13 +116,10 @@ def restart_jks():
 # main
 def main(args):
  
-    # 引数のチェック
-    # chk_args() <----- OLD
-    check_args(args)
+    # # 引数のチェック
+    # # args = sys.argv
+    # chk_args()
     # print ('引数 = ' + args[1] + ' の文字数に問題はありません')
-
-
-
 
     # # 引数を元に参照すべきURLを決定する
     # print('今回、ダウンロードすべきURL = ' + rss_url())
@@ -170,9 +144,18 @@ def main(args):
     # # Jenkinsのプロセスの再起動を行う
     # restart_jks()
 
+    # chk_jks_ver()
+
+    # print(args)
+    # print(args.support)
+
+    print ('RSS URL is %s' % (jedge_rss_url(args)))
+
+
+
 
 if __name__ == '__main__':
 
-    args = parse_opts()
-
+    args = parse_opts()    
+    
     main(args)
