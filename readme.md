@@ -1,8 +1,8 @@
 # update-jenkins
 
-## 使い方
+[![CircleCI](https://circleci.com/gh/iganari/update-jenkins/tree/master.svg?style=svg)](https://circleci.com/gh/iganari/update-jenkins/tree/master)
 
-### shell
+## Shell 版
 
 + LTS update
 
@@ -23,7 +23,7 @@ sh update-jenkins.sh hogehoge
 sh update-jenkins.sh latest
 ```
 
-### Python
+## Python 版
 
 + Version
 
@@ -33,26 +33,78 @@ sh update-jenkins.sh latest
 Python 3.6.2
 ```
 
-+ 仮想環境の有効化
++ 仮想環境について
+    + 作成
+
+    ```
+    python3 -m venv .update-jenkins
+    ```
+
+    + 仮想環境の有効化
+
+    ```
+    source .update-jenkins/bin/activate
+    ```
+
+    + 必要なライブラリをpip installする
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+    + 無効化
+
+    ```
+    deactivate
+    ```
+
++ [機能] 使用出来るバージョンの確認をする
 
 ```
-source .update-jenkins/bin/activate
+WIP
+python3 update-jenkins.py -c
+OR
+python3 update-jenkins.py --check
 ```
 
-+ 仮想環境の無効化
++ [機能] JenkinsのWARをダウンロードして入れ替える + Jenkinsの再起動
+    + LTS版
 
-```
-deactivate
-```
+    ```
+    WIP
+    python3 update-jenkins.py -v lts
+    ```
+    
+    + 最新版
+
+    ```
+    WIP
+    python3 update-jenkins.py -v latest
+    ```
+
+    + Version指定( :warning: WIP :warning: )
+
+    ```
+    WIP
+    python3 update-jenkins.py -v 2.153
+    ```
+
+
 
 ## 簡易環境
 
 ### docker
 
-+ :whale: dockerを用いてスクリプトの簡易動作試験場を作る
++ dockerを用いてスクリプトの簡易動作試験場を作る
 
 ```
 cd opsfiles/docker
 sh docker-build-run.sh
 ```
 
++ :whale: Jenkinsの確認(ダミーファイル)
+
+```
+# ls -la /usr/lib/jenkins/jenkins.war 
+-rw-r--r-- 1 root root 0 Jan 17 11:14 /usr/lib/jenkins/jenkins.war
+```
