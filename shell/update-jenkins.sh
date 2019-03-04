@@ -9,6 +9,8 @@ check_arg()
 
   if [ "$1" = "" ]; then
     echo "no argument"
+    exit 1
+
     ### latest + forceupdate
     _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
 
