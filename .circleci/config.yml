@@ -9,8 +9,8 @@ jobs:
           fingerprints:
               - "62:6d:f6:0d:7d:39:54:b0:b7:d5:0e:ef:43:05:e6:f5"
       - run:
-          name: install curl
-          command: "apk add curl"
+          name: install curl && curl-dev
+          command: "apk add curl curl-dev"
       - run:
           name: remote update
           command: "git remote update -p"
@@ -39,4 +39,3 @@ workflows:
             branches:
               only: 
                 - master
-                - feature/python-refactoring
