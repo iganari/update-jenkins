@@ -10,7 +10,7 @@ jobs:
               - "62:6d:f6:0d:7d:39:54:b0:b7:d5:0e:ef:43:05:e6:f5"
       - run:
           name: install curl && libcurl && CMake
-          command: "apk add curl libcurl cmake"
+          command: "apk update && apk add curl libcurl cmake"
       - run:
           name: debug
           command: curl -V
