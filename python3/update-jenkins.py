@@ -8,25 +8,8 @@
 # https://jenkins.io/changelog/rss.xml
 
 
-# jenkins => jks
-
-
 import sys
 import os
-
-# args = sys.argv
-
-# def chk_args():
-#     # args = sys.argv
-#     if len(args) == 1:
-#         print ('引数をいれてください')
-#         sys.exit(0)
-#     elif len(args) == 2:
-#         # print ('OK')
-#         pass 
-#     elif len(args) > 2:
-#         print ('引数が多すぎます')
-#         sys.exit(0)
 
 def parse_opts():
 
