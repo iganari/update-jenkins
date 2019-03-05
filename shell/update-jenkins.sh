@@ -8,26 +8,25 @@
 # set -xeu
 set -x
 
+url_latest='http://updates.jenkins-ci.org/download/war/index.html'
+url_lts='https://jenkins.io/changelog-stable/rss.xml'
+
 check_arg()
 {
   ## sh update-jenkins.sh version -y の形しか許さない
 
   if [ "$1" = "" ]; then
-    echo "no argument"
+    echo "Usage: $(basename $0) {lts|latest}"
     exit 1
 
-    ### latest + forceupdate
-    _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
-
   elif [ "$1" = "-f" ]; then
-    echo "no argument"
-    ### latest + forceupdate
-    _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
- 
+    echo "Usage: $(basename $0) {lts|latest}"
+    exit 1
+
   elif [ "$1" = "latest" ]; then
     echo "$1"
     ### latest
-    _VER=`curl http://updates.jenkins-ci.org/download/war/index.html | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
+    _VER=`curl ${url_latest} | grep jenkins.war | grep download | head -n1 | awk -F\/ '{print $10}'`
     if [ "$2" = "" ];then
       _FORCE_FRAG='false'  
     elif [ "$2" = "-y" ];then
@@ -40,7 +39,7 @@ check_arg()
   elif [ "$1" = "lts" ]; then
     echo "$1"
     ### get LTS version
-    _VER=`curl https://jenkins.io/changelog-stable/rss.xml | grep '<title>Jenkins' | cut -c8- | cut -d\< -f1 | cut -d\  -f2 | head -n1`
+    _VER=`curl ${url_lts} | grep '<title>Jenkins' | cut -c8- | cut -d\< -f1 | cut -d\  -f2 | head -n1`
     if [ "$2" = "" ];then
       _FORCE_FRAG='false'  
     elif [ "$2" = "-y" ];then
@@ -57,15 +56,6 @@ check_arg()
 }
 
 
-#     expr $1 + 1 > /dev/null 2>&1
-#     if [ $? -lt 2 ] ; then
-#         # 数値
-#         echo "number."
-#         _VER=$1
-#     else
-#         echo "not number."
-#         exit 1
-#     fi
 
 check_jenkins_path()
 {
@@ -88,14 +78,6 @@ check_jenkins_path()
     echo 'no idea'
   fi
 }
-
-# check_os()
-# {
-#     # When CentOS
-#     _J_DIR='/usr/lib/jenkins'
-#     # When Other
-#     # WIP
-# }
 
 replace_jenkins_warfile()
 {
@@ -130,7 +112,8 @@ restart_jenkins_process()
   fi
 }
 
-# echo $_VER
+
+# Main
 check_arg $1 $2
 check_jenkins_path
 mkdir ${_J_DIR}/${_VER}
