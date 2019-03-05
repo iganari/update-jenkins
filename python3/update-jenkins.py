@@ -14,19 +14,45 @@
 import sys
 import os
 
-args = sys.argv
+# args = sys.argv
 
-def chk_args():
-    # args = sys.argv
-    if len(args) == 1:
-        print ('引数をいれてください')
-        sys.exit(0)
-    elif len(args) == 2:
-        # print ('OK')
-        pass 
-    elif len(args) > 2:
-        print ('引数が多すぎます')
-        sys.exit(0)
+# def chk_args():
+#     # args = sys.argv
+#     if len(args) == 1:
+#         print ('引数をいれてください')
+#         sys.exit(0)
+#     elif len(args) == 2:
+#         # print ('OK')
+#         pass 
+#     elif len(args) > 2:
+#         print ('引数が多すぎます')
+#         sys.exit(0)
+
+def parse_opts():
+
+    # from argparse import ArgumentParser
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--support',
+        '-s',
+        required=True,
+        dest='support',
+        help='Usage: python3 ' + __file__ + ' {lts|latest}'
+    )
+
+    return parser.parse_args()
+
+def check_args(args):
+
+    if args.support == 'lts' or args.support == 'latest':
+        # pass
+        print('ok')
+    else:
+        print('Support Argument is {lts|latest}')
+        sys.exit(1)
+
 
 def rss_url():
     if args[1] == 'lts':
@@ -97,6 +123,7 @@ def get_jks_war():
 def chg_jks_symbolic():
 
     jks_war_dir  = '/usr/lib/jenkins'
+    
     jks_war_file = jks_war_dir + '/jenkins.war'
 
     os.unlink(jks_war_file)
@@ -110,36 +137,42 @@ def restart_jks():
 
 
 # main
-def main():
+def main(args):
  
     # 引数のチェック
-    # args = sys.argv
-    chk_args()
-    print ('引数 = ' + args[1] + ' の文字数に問題はありません')
+    # chk_args() <----- OLD
+    check_args(args)
+    # print ('引数 = ' + args[1] + ' の文字数に問題はありません')
 
-    # 引数を元に参照すべきURLを決定する
-    print('今回、ダウンロードすべきURL = ' + rss_url())
-    # dw_url = rss_url()
-    # print('今回、ダウンロードすべきURL = ' + dw_url)
 
-    # 引数で要求されたJenkinsのバージョンを取る
-    # jks_ver = chk_jks_ver()
-    # print (jks_ver)
-    print ('今回、ダウンロードしたいJenkinsのバージョン = ' + chk_jks_ver())
 
-    # jenkinsの本体jarについてのチェックを行う
-    chk_war_file()
 
-    # 任意のVersionのjenkinsをダウンロードする
-    get_jks_war()
+    # # 引数を元に参照すべきURLを決定する
+    # print('今回、ダウンロードすべきURL = ' + rss_url())
+    # # dw_url = rss_url()
+    # # print('今回、ダウンロードすべきURL = ' + dw_url)
 
-    # シンボリックリンクの付け替えを行う
-    chg_jks_symbolic()
-    # sys.exit(0)
+    # # 引数で要求されたJenkinsのバージョンを取る
+    # # jks_ver = chk_jks_ver()
+    # # print (jks_ver)
+    # print ('今回、ダウンロードしたいJenkinsのバージョン = ' + chk_jks_ver())
 
-    # Jenkinsのプロセスの再起動を行う
-    restart_jks()
+    # # jenkinsの本体jarについてのチェックを行う
+    # chk_war_file()
+
+    # # 任意のVersionのjenkinsをダウンロードする
+    # get_jks_war()
+
+    # # シンボリックリンクの付け替えを行う
+    # chg_jks_symbolic()
+    # # sys.exit(0)
+
+    # # Jenkinsのプロセスの再起動を行う
+    # restart_jks()
 
 
 if __name__ == '__main__':
-    main()
+
+    args = parse_opts()
+
+    main(args)
