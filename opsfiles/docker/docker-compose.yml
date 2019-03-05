@@ -7,9 +7,13 @@ services:
     build: ./centos/
     container_name: update-jenkins_centos
     tty: true
+    volumes:
+      - ../../:/opt/update-jenkins
 
   ubuntu:
     # image: iganarix/base-ubuntu-16.04
     build: ./ubuntu/
     container_name: update-jenkins_ubuntu
     tty: true
+    volumes:
+      - ../../:/opt/update-jenkins
