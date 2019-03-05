@@ -12,9 +12,6 @@ jobs:
           name: install curl && curl-dev
           command: "apk add curl curl-dev"
       - run:
-          name: debug
-          command: curl -V
-      - run:
           name: remote update
           command: "git remote update -p"
       - run:
@@ -42,4 +39,3 @@ workflows:
             branches:
               only: 
                 - master
-                - hotfix/20190305
