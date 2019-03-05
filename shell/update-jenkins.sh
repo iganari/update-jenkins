@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# For Example
+# sh update-jenkins.sh lts
+# sh update-jenkins.sh latst
+
+
 # set -xeu
 set -x
 
