@@ -99,10 +99,23 @@ python3 update-jenkins.py --check
 
 ```
 cd opsfiles/docker
-sh docker-build-run.sh
+sh dcs.sh status
 ```
 
-+ :whale: Jenkinsの確認(ダミーファイル)
++ コンテナ内ログインしたい場合 ---> :whale:
+
+```
+### CentOSコンテナに入る
+docker exec -it update-jenkins_centos /bin/bash
+
+### Ubuntuコンテナに入る
+docker exec -it update-jenkins_ubuntu /bin/bash
+```
+
+
+
+
++ :warning: :whale: Jenkinsの確認(ダミーファイル)
 
 ```
 # ls -la /usr/lib/jenkins/jenkins.war 
