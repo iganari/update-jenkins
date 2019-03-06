@@ -10,3 +10,5 @@ RUN touch           /usr/share/jenkins/jenkins.war &&\
     chown root.root /usr/share/jenkins/jenkins.war &&\
     chmod 0644      /usr/share/jenkins/jenkins.war
 
+### install package
+RUN apt install -y python3-venv
